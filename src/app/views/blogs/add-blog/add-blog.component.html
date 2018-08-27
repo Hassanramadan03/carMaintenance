@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>News Form</strong>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddBlogs()" [formGroup]="blogsForm">
+
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="dbid">dbid</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="dbid" id="level-id" name="dbid" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="level-id">level-id</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="levelId" id="level-id" name="level-id" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="title">Title</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="title" id="title" name="title" class="form-control" placeholder="Title">
+                            <span *ngIf="(blogsForm.get('title').touched || 
+                            blogsForm.get('title').dirty) && 
+                            blogsForm.get('title').errors">
+                            <span class="errors" *ngIf="blogsForm.get('title').errors.required">
+                                Please enter title
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="description">Description</label>
+                        <div class="col-md-9">
+                            <textarea formControlName="description" id="description" name="description" class="form-control" placeholder="Description" rows="3"></textarea>
+                            <span *ngIf="(blogsForm.get('description').touched || 
+                            blogsForm.get('description').dirty) && 
+                            blogsForm.get('description').errors">
+                            <span class="errors" *ngIf="blogsForm.get('description').errors.required">
+                                Please enter blog body
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="subDescription">Sub Description</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="subDescription" id="subDescription" name="subDescription" class="form-control" placeholder="Sub Description">
+                            <span *ngIf="(blogsForm.get('subDescription').touched || 
+                            blogsForm.get('subDescription').dirty) && 
+                            blogsForm.get('subDescription').errors">
+                            <span class="errors" *ngIf="blogsForm.get('subDescription').errors.required">
+                                Please enter blog small description
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Blog Image</label>
+                        <div class="col-md-9">
+                            <input type="file" id="file-input" name="file-input" (change)="addBlogImage($event)">
+                           
+                    </div>
+</div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" (click)="onAddBlogs()" class="btn btn-sm btn-primary" *ngIf="editMode==false" [disabled]="!blogsForm.valid"><i class="fa fa-dot-circle-o"></i> {{'Add Blogs'}}</button>
+                <button type="submit" (click)="onUpdateBlog()" class="btn btn-sm btn-primary" *ngIf="editMode==true" [disabled]="!blogsForm.valid"><i class="fa fa-dot-circle-o"></i> {{'Update Blogs'}}</button>
+                <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            </div>
+
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>

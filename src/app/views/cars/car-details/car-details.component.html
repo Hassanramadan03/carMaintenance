@@ -1,0 +1,274 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Add Car Details</strong>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddNewCar()" [formGroup]="carForm">
+                    <div class="form-group row" style="display:none">
+                        <div class="col-md-12">
+                            <label class="col-form-label" for="carId">carId</label>
+                            <input type="text" formControlName="carId" id="carId" name="carId" class="form-control" placeholder="Text">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="carNameEn">Car Name English</label>
+                            <input type="text" formControlName="carNameEn" id="text-input" name="carNameEn" class="form-control" placeholder="Car Name English">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="carNameAr">Car Name Arabic</label>
+                            <input type="text" formControlName="carNameAr" id="carNameAr" name="carNameAr" class="form-control" placeholder="Car Name Arabic">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="price">Car Price</label>
+                            <input type="text" formControlName="price" id="price" name="price" class="form-control" placeholder="Price">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="grossVehicleWeight">Gross Vehicle Weight</label>
+                            <input type="text" formControlName="grossVehicleWeight" id="grossVehicleWeight" name="grossVehicleWeight" class="form-control"
+                                placeholder="Gross Vehicle">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="groundClearance">Ground Clearance</label>
+                            <input type="text" formControlName="groundClearance" id="groundClearance" name="groundClearance" class="form-control" placeholder="Ground Clearance">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="transmission">Transmission</label>
+                            <input type="text" formControlName="transmission" id="transmission" name="transmission" class="form-control" placeholder="Transmission">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="width">Width</label>
+                            <input type="text" formControlName="width" id="width" name="width" class="form-control" placeholder="Width">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="height">Height</label>
+                            <input type="text" formControlName="height" id="height" name="height" class="form-control" placeholder="Height">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="length">Length</label>
+                            <input type="text" formControlName="length" id="length" name="length" class="form-control" placeholder="Length">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="maxPower">Max Power</label>
+                            <input type="text" formControlName="maxPower" id="maxPower" name="maxPower" class="form-control" placeholder="Max Power">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="maxTorque">Max Torque</label>
+                            <input type="text" formControlName="maxTorque" id="maxTorque" name="maxTorque" class="form-control" placeholder="Max Torque">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="curbWeight">Curb Weight</label>
+                            <input type="text" formControlName="curbWeight" id="curbWeight" name="curbWeight" class="form-control" placeholder="Curb Weight">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="trunkCapacity">Trunk Capacity</label>
+                            <input type="text" formControlName="trunkCapacity" id="trunkCapacity" name="trunkCapacity" class="form-control" placeholder="Trunk Capacity">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="engineCapacity">Engine Capacity</label>
+                            <input type="text" formControlName="engineCapacity" id="engineCapacity" name="engineCapacity" class="form-control" placeholder="Engine Capacity">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="fuelTankCapacity">Fuel Tank Capacity</label>
+                            <input type="text" formControlName="fuelTankCapacity" id="fuelTankCapacity" name="fuelTankCapacity" class="form-control"
+                                placeholder="Tank Capacity">
+                        </div>
+
+                    </div>
+
+                    <div class="form-group row">
+
+                        <div class="col-md-4">
+                            <label class="col-form-label" for="model">Choose Model</label>
+                            <select class="form-control" id="model" formControlName="carModelId">
+                                <option value=0>select car model</option>
+                                <option *ngFor="let model of models" [value]="model.modelId">{{model.modelNameEn}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <span class="errors" *ngIf="isValidImage===false">
+                            Please Add All Images
+                        </span>
+                    </div>
+                    <div class="form-group row">
+                        <hr class="col-md-12 " />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Main Image</label>
+                        <div class="col-md-6">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelect($event)">
+                            <!-- <label *ngIf="imageEdit">{{imageEdit}}</label>-->
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                        <div class="col-md-3" *ngIf="editMode">
+                            <img *ngIf="car.mainPic" src="{{'http://41.187.117.153:8080/'+ car.mainPic}} " class="img-avatar" alt="image" />
+                            <img *ngIf="!car.mainPic" src="assets/img/user.png" class="img-avatar" alt="image" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <hr class="col-md-12 " />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">First Internal Image</label>
+                        <div class="col-md-6">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelectInternal1($event)">
+                            <label *ngIf="imageEdit">{{internalImageEdit1}}</label>
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                        <div class="col-md-3" *ngIf="editMode">
+                            <img *ngIf="car.mainPic" src="{{'http://41.187.117.153:8080/'+ car.internalImage1}} " class="img-avatar" alt="image" />
+                            <img *ngIf="!car.mainPic" src="assets/img/car.png" class="img-avatar" alt="image" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Second Internal Image</label>
+                        <div class="col-md-6">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelectInternal2($event)">
+                            <label *ngIf="imageEdit">{{internalImageEdit2}}</label>
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                        <div class="col-md-3" *ngIf="editMode">
+                            <img *ngIf="car.mainPic" src="{{'http://41.187.117.153:8080/'+ car.internalImage2}} " class="img-avatar" alt="image" />
+                            <img *ngIf="!car.mainPic" src="assets/img/car.png" class="img-avatar" alt="image" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Thired Internal Image</label>
+                        <div class="col-md-6">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelectInternal3($event)">
+                            <label *ngIf="imageEdit">{{internalImageEdit3}}</label>
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                        <div class="col-md-3" *ngIf="editMode">
+                            <img *ngIf="car.mainPic" src="{{'http://41.187.117.153:8080/'+ car.internalImage3}} " class="img-avatar" alt="image" />
+                            <img *ngIf="!car.mainPic" src="assets/img/car.png" class="img-avatar" alt="image" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <hr class="col-md-12 " />
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">First Exnternal Image</label>
+                        <div class="col-md-6">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelectExernal1($event)">
+                            <label *ngIf="imageEdit">{{externalImageEdit1}}</label>
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                        <div class="col-md-3" *ngIf="editMode">
+                            <img *ngIf="car.mainPic" src="{{'http://41.187.117.153:8080/'+ car.externalImage1}} " class="img-avatar" alt="image" />
+                            <img *ngIf="!car.mainPic" src="assets/img/car.png" class="img-avatar" alt="image" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Second Exnternal Image</label>
+                        <div class="col-md-6">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelectExernal2($event)">
+                            <label *ngIf="imageEdit">{{externalImageEdit2}}</label>
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                        <div class="col-md-3" *ngIf="editMode">
+                            <img *ngIf="car.mainPic" src="{{'http://41.187.117.153:8080/'+ car.externalImage2}} " class="img-avatar" alt="image" />
+                            <img *ngIf="!car.mainPic" src="assets/img/car.png" class="img-avatar" alt="image" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Thired Exnternal Image</label>
+                        <div class="col-md-6">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelectExernal3($event)">
+                            <label *ngIf="imageEdit">{{externalImageEdit3}}</label>
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                        <div class="col-md-3" *ngIf="editMode">
+                            <img *ngIf="car.mainPic" src="{{'http://41.187.117.153:8080/'+ car.externalImage3}} " class="img-avatar" alt="image" />
+                            <img *ngIf="!car.mainPic" src="assets/img/car.png" class="img-avatar" alt="image" />
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Car Catalog</label>
+                        <div class="col-md-6">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelectCarCatalog($event)">
+                            <label *ngIf="imageEdit">{{externalImageEdit3}}</label>
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" (click)="onAddNewCar()" [disabled]="!carForm.valid" class="btn btn-sm btn-primary" *ngIf="editMode==false">
+                    <i class="fa fa-dot-circle-o"></i> {{'Add Car'}}</button>
+                <button type="submit" (click)="onUpdateCar()" class="btn btn-sm btn-primary" *ngIf="editMode==true">
+                    <i class="fa fa-dot-circle-o"></i> {{'Update Car'}}</button>
+                <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger">
+                    <i class="fa fa-ban"></i> Reset</button>
+            </div>
+
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>

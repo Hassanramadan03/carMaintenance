@@ -1,0 +1,62 @@
+<div class="animated fadeIn" >
+        <div class="row">
+                <div class="col-md-3">
+                        <button type="button" class="btn btn-success" (click)="onAddNewNews()" style="width: 100%">Add New News<i class="fa fa-plus" style="margin-left:1em"></i></button>
+                </div>
+            </div>
+            <br/>
+    <div class="row" *ngIf="newsList">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> News Table
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>SubDescription</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let news of newsList">
+                                <td>
+                                    <img *ngIf="news.coverImg!=''" src="{{'https://geyoushi-backend.herokuapp.com/'+ news.coverImg}} " alt="Brand Car" class="img-table" />
+                                    <img *ngIf="news.coverImg==''" src="assets/img/logo-symbol.png" alt="Brand Car" class="img-table" />
+                                </td>
+                                <td>{{news.title}}</td>
+                                <td>{{news.description}}</td>
+                                <td>{{news.subDescription}}</td>
+                                <td>
+                                    <button class="btn btn-warning" type="button" (click)="editForm(news)">Edit</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" (click)="onDeleteNews(news.dbid)">Delete</button>
+                                </td>
+                                <ng-template #deleteTemplate>
+                                        <div class="modal-body text-center">
+                                          <p>Do You Want To Delete This News?</p>
+                                          <button type="button" class="btn btn-default" (click)="confirm(news.dbid)" >Yes</button>
+                                          <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                                        </div>
+                                      </ng-template>
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+
+<div *ngIf="!newsList">
+        <h3>No News Found</h3>
+    </div>

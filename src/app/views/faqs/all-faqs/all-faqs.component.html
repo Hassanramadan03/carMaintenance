@@ -1,0 +1,60 @@
+<div class="animated fadeIn" >
+    <div class="row">
+        <div class="col-md-3">
+                <button type="button" class="btn btn-success" (click)="onAddNewFAQ()" style="width: 100%">Add New FAQ<i class="fa fa-plus" style="margin-left:1em"></i></button>
+        </div>
+    </div>
+    <br/>
+    <div class="row" *ngIf="faqList">
+        <div class="col-md-12">
+            <div class="card">
+                    
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Faq Table
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Faq Title</th>
+                                <th>Faq Description</th>
+                                <th>Faq Answer</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let faq of faqList | paginate : {itemsPerPage:10 , currentPage : page, totalItems: totalCount}">
+
+                                <td>{{faq.faqTitle}}</td>
+                                <td>{{faq.faqDescription}}</td>
+                                <td>{{faq.answer}}</td>
+                                <td>
+                                    <button class="btn btn-warning" type="button" (click)="editForm(faq.faqId)">Edit</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" (click)="openModal(deleteTemplate)">Delete</button>
+                                </td>
+                                <ng-template #deleteTemplate>
+                                        <div class="modal-body text-center">
+                                          <p>Do You Want To Delete This Faq?</p>
+                                          <button type="button" class="btn btn-default" (click)="onDeleteFaq(faq.faqId)" >Yes</button>
+                                          <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                                        </div>
+                                      </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagein">
+                        <pagination-controls (pageChange)="pageChanged($event)" maxSize={{totalPages}}></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+
+<div *ngIf="!faqList">
+    <h3>No FAQs Found</h3>
+</div>

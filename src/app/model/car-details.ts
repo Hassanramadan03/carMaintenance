@@ -1,0 +1,35 @@
+import { Model } from "./Model";
+
+export interface CarDetails {
+    carId: number,
+    carNameAr: string,
+    carNameEn: String,
+    carRate: string,
+    curbWeight: string,
+    engineCapacity: string,
+    fuelTankCapacity: string,
+    grossVehicleWeight: string,
+    groundClearance: string,
+    height: string,
+    length: string,
+    width: string,
+    mainPic: string,
+    maxPower: string,
+    maxTorque: string,
+    totalNumOfComments: string,
+    totalNumOfDislikes: string,
+    totalNumOfLikes: string,
+    totalNumOfRatedUsers: string,
+    transmission: string,
+    trunkCapacity: string,
+    carModel: Model,
+    carPrice: String,
+    carCatalog: String,
+    internalImage1: String,
+    internalImage2: String,
+    internalImage3: String,
+    externalImage1: String,
+    externalImage2: String,
+    externalImage3: String
+
+}

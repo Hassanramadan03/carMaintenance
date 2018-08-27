@@ -1,0 +1,59 @@
+<div class="animated fadeIn" >
+        <div class="row">
+                <div class="col-md-3">
+                        <button type="button" class="btn btn-success" (click)="onAddNewAdmin()" style="width: 100%">Add New Admin<i class="fa fa-plus" style="margin-left:1em"></i></button>
+                </div>
+            </div>
+            <br/>
+    <div class="row" *ngIf="adminList">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Admin Table
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let admin of adminList | paginate : {itemsPerPage:10 , currentPage : page, totalItems: totalCount}">
+                                <td>
+                                    <img *ngIf="admin.profilePic!= null" src="{{'http://localhost:8080/'+ admin.UserImage}} " alt="admin image" class="img-table" />
+                                    <img *ngIf="admin.profilePic== null" src="assets/img/logo-symbol.png" alt="admin image" class="img-table" />
+                                </td>
+                                <td>{{admin.firstName}}</td>
+                                <td>{{admin.lastName}}</td>
+                                <td>{{admin.email}}</td>
+                                <td>
+                                    <button class="btn btn-warning" type="button" (click)="editForm(admin.userId)">Edit</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button"  (click)="openModal(deleteTemplate)">Delete</button>
+                                </td>
+                                <ng-template #deleteTemplate>
+                                        <div class="modal-body text-center">
+                                          <p>Do You Want To Delete This User ?</p>
+                                          <button type="button" class="btn btn-default" (click)="confirm(admin.userId)" >Yes</button>
+                                          <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                                        </div>
+                                      </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagein">
+                        <pagination-controls (pageChange)="pageChanged($event)" maxSize={{totalPages}}></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>

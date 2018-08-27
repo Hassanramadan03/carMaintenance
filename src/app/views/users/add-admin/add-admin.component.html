@@ -1,0 +1,116 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Add New Admin</strong>
+
+                </div>
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddAdmin()" [formGroup]="adminForm">
+                    <div class="card-body">
+                        <div class="row" style="display:none">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">User Id</label>
+                                    <input type="text" formControlName="userId" name="userId" class="form-control" id="userId" placeholder="first name">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">First name</label>
+                                    <input type="text" formControlName="firstName" name="firstName" class="form-control" id="firstName" placeholder="first name">
+                                    <span *ngIf="(adminForm.get('firstName').touched || 
+                                    adminForm.get('firstName').dirty) && 
+                                    adminForm.get('firstName').errors">
+                                    <span class="errors" *ngIf="adminForm.get('firstName').errors.required">
+                                        Please enter first name
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Last name</label>
+                                    <input type="text" formControlName="lastName" name="lastName" class="form-control" id="lastName" placeholder="last name">
+                                    <span *ngIf="(adminForm.get('lastName').touched || 
+                                    adminForm.get('lastName').dirty) && 
+                                    adminForm.get('lastName').errors">
+                                    <span class="errors" *ngIf="adminForm.get('lastName').errors.required">
+                                        Please enter last name
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">E-mail</label>
+                                    <input type="text" formControlName="email" name="email" class="form-control" id="email" placeholder="email">
+                                    <span *ngIf="(adminForm.get('email').touched || 
+                                    adminForm.get('email').dirty) && 
+                                    adminForm.get('email').errors">
+                                    <span class="errors" *ngIf="adminForm.get('email').errors.required">
+                                        Please enter valid email
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Password</label>
+                                    <input type="password" formControlName="password" name="password" class="form-control" id="password" placeholder="password">
+                                    <span *ngIf="(adminForm.get('password').touched || 
+                                    adminForm.get('password').dirty) && 
+                                    adminForm.get('password').errors">
+                                    <span class="errors" *ngIf="adminForm.get('password').errors.required">
+                                        Please enter password
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Mobile Number</label>
+                                    <input type="text" formControlName="mobile" name="mobile" class="form-control" id="mobile" placeholder="mobile">
+                                    <span *ngIf="(adminForm.get('mobile').touched || 
+                                    adminForm.get('mobile').dirty) && 
+                                    adminForm.get('mobile').errors">
+                                    <span class="errors" *ngIf="adminForm.get('mobile').errors.required">
+                                        Please enter mobile
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <button type="submit" (click)="onAddAdmin()" class="btn btn-sm btn-primary" [disabled]="!adminForm.valid" *ngIf="editMode==false"><i class="fa fa-dot-circle-o"></i> {{'Add Admin'}}</button>
+                                    <button type="submit"  class="btn btn-sm btn-primary"  (click)="onUpdateAdmin()" [disabled]="!adminForm.valid" *ngIf="editMode==true"><i class="fa fa-dot-circle-o"></i> {{'Update Admin'}}</button>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

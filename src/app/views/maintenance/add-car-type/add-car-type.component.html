@@ -1,0 +1,201 @@
+<div class="row" *ngIf="!activateBrand">
+    <div class="col-md-3">
+            <button type="button" class="btn btn-success" (click)="onActivateBrand()" style="width: 100%">Add New Car Brand<i class="fa fa-plus" style="margin-left:1em"></i></button>
+    </div>
+</div>
+<br/>
+<div class="row" *ngIf="activateBrand">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Brand Form</strong>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddNewBrand()" [formGroup]="brandForm">
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="brandId">brandId</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="brandId" id="brandId" name="brandId" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="text-input">Level Id</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="levelId" id="text-input" name="text-input" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="text-input">Brand Name English</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="brandNameEn" id="text-input" name="text-input" class="form-control" placeholder="English brand name">
+                            <span *ngIf="(brandForm.get('brandNameEn').touched || 
+                            brandForm.get('brandNameEn').dirty) && 
+                            brandForm.get('brandNameEn').errors">
+                            <span class="errors" *ngIf="brandForm.get('brandNameEn').errors.required">
+                                Please enter English brand name
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="text-input">Brand Name Arabic</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="brandNameAr" id="text-input" name="text-input" class="form-control" placeholder="Arabic brand name">
+                            <span *ngIf="(brandForm.get('brandNameAr').touched || 
+                            brandForm.get('brandNameAr').dirty) && 
+                            brandForm.get('brandNameAr').errors">
+                            <span class="errors" *ngIf="brandForm.get('brandNameAr').errors.required">
+                                Please enter Arabic brand name
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" (click)="onAddNewBrand()" class="btn btn-sm btn-primary" *ngIf="editMode==false" [disabled]="!brandForm.valid"><i class="fa fa-dot-circle-o"></i> {{'Add Brand'}}</button>
+                <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger" ><i class="fa fa-ban"></i> Reset</button>
+            </div>
+
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>
+
+<!--Car Model    -------- -->
+
+<div class="row" *ngIf="!activateModel">
+    <div class="col-md-3">
+            <button type="button" class="btn btn-success" (click)="onActivateModel()" style="width: 100%">Add New Car Model<i class="fa fa-plus" style="margin-left:1em"></i></button>
+    </div>
+</div>
+<br/>
+
+<div class="row" *ngIf="activateModel">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Car Model Form</strong>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddNewModel()" [formGroup]="modelForm">
+
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="modelId">modelId</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="modelId" id="modelId" name="modelId" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="text-input">Car Model Name English</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="modelNameEn" id="text-input" name="text-input" class="form-control" placeholder="English Model Name">
+                            <span *ngIf="(modelForm.get('modelNameEn').touched || 
+                            modelForm.get('modelNameEn').dirty) && 
+                            modelForm.get('modelNameEn').errors">
+                            <span class="errors" *ngIf="modelForm.get('modelNameEn').errors.required">
+                                    Please enter English model name
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="text-input">Car Model Name Arabic</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="modelNameAr" id="text-input" name="text-input" class="form-control" placeholder="Arabic Model Name">
+                            <span *ngIf="(modelForm.get('modelNameAr').touched || 
+                            modelForm.get('modelNameAr').dirty) && 
+                            modelForm.get('modelNameAr').errors">
+                            <span class="errors" *ngIf="modelForm.get('modelNameAr').errors.required">
+                                    Please enter Arabic model name
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="brand">Choose Brand</label>
+                        <div class="col-md-9">
+                            <select class="form-control" id="brand" formControlName="carBrandId">
+                            <option value="0" [selected] ="true" >{{'select car brand'}}</option>
+                    <option *ngFor="let brand of brands" [value]="brand.brandId" >{{brand.brandNameEn}}</option>
+                    <span *ngIf="(modelForm.get('carBrandId').touched || 
+                    modelForm.get('carBrandId').dirty) && 
+                    modelForm.get('carBrandId').errors">
+                    <span class="errors" *ngIf="modelForm.get('carBrandId').errors.required">
+                            Please enter select brand
+                        </span>
+                    </span>
+                  </select>
+                        </div>
+                    </div>
+                   
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" (click)="onAddNewModel()" class="btn btn-sm btn-primary" *ngIf="editMode==false"  [disabled]="!modelForm.valid" ><i class="fa fa-dot-circle-o"></i> {{'Add Model'}}</button>
+                <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            </div>
+
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>
+
+
+
+
+<div class="animated fadeIn" *ngIf="modelsList">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Model Table
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Model Name En</th>
+                                <th>Model Name Ar</th>
+                                <th>Brand Name</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let models of modelsList | paginate : {itemsPerPage:5 , currentPage : page, totalItems: totalCount}">
+                                <td>{{models.modelNameEn}}</td>
+                                <td>{{models.modelNameAr}}</td>
+                                <td>{{models.carBrands.value}}</td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" (click)="openModal(deleteTemplate)" >Delete</button>
+                                </td>
+
+                                <ng-template #deleteTemplate>
+                                    <div class="modal-body text-center">
+                                      <p>Do You Want To Delete This Model?</p>
+                                      <button type="button" class="btn btn-default" (click)="onDeleteModel(models.modelId)" >Yes</button>
+                                      <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                                    </div>
+                                  </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagein">
+                        <pagination-controls (pageChange)="pageChanged($event)" maxSize={{totalPages}}></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>

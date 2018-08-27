@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>About Us Form</strong>
+            </div>
+            <div class="card-body">
+                <form action="" class="form-horizontal">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="whoWeAre">Who we Are</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="whoWeAre" [(ngModel)]="about.whoWeAre" [value]="about.whoWeAre" placeholder="Who we Are"
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="mission">Mission</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="mission" [(ngModel)]="about.mission" [value]="about.mission" placeholder="mission"
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="vission">Vission</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="vission" [(ngModel)]="about.vission" [value]="about.vission" placeholder="vission"
+                                rows="3"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" (click)="onAddNewBrand()" class="btn btn-sm btn-primary" *ngIf="editMode==false" [disabled]="!aboutForm.valid">
+                    <i class="fa fa-dot-circle-o"></i> {{'Add Brand'}}</button>
+                <button type="submit" (click)="onUpdateBrand()" class="btn btn-sm btn-primary" *ngIf="editMode==true" [disabled]="!aboutForm.valid">
+                    <i class="fa fa-dot-circle-o"></i> {{'Update Brand'}}</button>
+                <button type="reset" (click)="about={}" class="btn btn-sm btn-danger">
+                    <i class="fa fa-ban"></i> Reset</button>
+            </div>
+
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>

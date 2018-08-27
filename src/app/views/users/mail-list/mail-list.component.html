@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Email List</strong>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddNewEmail()" [formGroup]="emailForm">
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="emailId">email Id</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="id" id="id" name="id" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="text-input">Email</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="email" id="text-input" name="text-input" class="form-control" placeholder="Admin Email">
+                            <span *ngIf="(emailForm.get('email').touched || 
+                            emailForm.get('email').dirty) && 
+                            emailForm.get('email').errors">
+                                <span class="errors" *ngIf="emailForm.get('email').errors.required">
+                                    Please add valid email
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" (click)="onAddNewEmail()" class="btn btn-sm btn-primary" *ngIf="editMode==false" [disabled]="!emailForm.valid">
+                    <i class="fa fa-dot-circle-o"></i> {{'Add Email'}}</button>
+                <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger">
+                    <i class="fa fa-ban"></i> Reset</button>
+            </div>
+
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>
+<div class="animated fadeIn" *ngIf="emails">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Email Table
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Email</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let adminMail of emails ">
+                                <td>{{adminMail.id}}</td>
+                                <td>{{adminMail.email}}</td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" data-toggle="modal" (click)="openModal(deleteTemplate)">Delete</button>
+                                </td>
+                                <ng-template #deleteTemplate>
+                                    <div class="modal-body text-center">
+                                        <p>Do You Want To Delete This Email?</p>
+                                        <button type="button" class="btn btn-default" (click)="confirm(adminMail.id)">Yes</button>
+                                        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+                                    </div>
+                                </ng-template>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>

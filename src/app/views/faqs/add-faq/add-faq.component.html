@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>FAQs Form</strong>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddFaq()" [formGroup]="faqForm">
+
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="modelId">FAQ Id</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="faqId" id="faqId" name="faqId" class="form-control" placeholder="FAQ Id">
+                            <span class="help-block"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="title">Question Title</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="faqTitle" id="faqTitle" name="faqTitle" class="form-control" placeholder="Question Title">
+                            <span *ngIf="(faqForm.get('faqTitle').touched || 
+                            faqForm.get('faqTitle').dirty) && 
+                            faqForm.get('faqTitle').errors">
+                            <span class="errors" *ngIf="faqForm.get('faqTitle').errors.required">
+                                    Please enter question title
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="description">Description</label>
+                        <div class="col-md-9">
+                            <textarea formControlName="faqDescription" id="faqDescription" name="faqDescription" class="form-control" placeholder="Question Description" rows="3"></textarea>
+                            <span *ngIf="(faqForm.get('faqDescription').touched || 
+                            faqForm.get('faqDescription').dirty) && 
+                            faqForm.get('faqDescription').errors">
+                            <span class="errors" *ngIf="faqForm.get('faqDescription').errors.required">
+                                    Please enter question body
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="answer">Answer</label>
+                        <div class="col-md-9">
+                            <textarea formControlName="answer" id="answer" name="answer" class="form-control" placeholder="Description Answer" rows="3"></textarea>
+                            <span *ngIf="(faqForm.get('answer').touched || 
+                            faqForm.get('answer').dirty) && 
+                            faqForm.get('answer').errors">
+                            <span class="errors" *ngIf="faqForm.get('answer').errors.required">
+                                    Please enter answer
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="card-footer">
+                <button type="submit" (click)="onAddFaq()" class="btn btn-sm btn-primary" *ngIf="editMode==false" [disabled]="!faqForm.valid"><i class="fa fa-dot-circle-o"></i> {{'Add Question'}}</button>
+                <button type="submit" (click)="onUpdateFaq()" class="btn btn-sm btn-primary" *ngIf="editMode==true" [disabled]="!faqForm.valid"><i class="fa fa-dot-circle-o"></i> {{'Update Question'}}</button>
+                <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>

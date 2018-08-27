@@ -1,0 +1,66 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-md-3">
+            <button type="button" class="btn btn-success" (click)="onAddNewCar()" style="width: 100%">Add New Car
+                <i class="fa fa-plus" style="margin-left:1em"></i>
+            </button>
+        </div>
+    </div>
+    <br/>
+    <div class="row" *ngIf="carlist">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> News Table
+                    <input type="text" class="form-control" (input)="onSearchChange($event.target.value)" placeholder="Search..." style="width: 250px;float: right;">
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>English Name</th>
+                                <th>Arabic Name</th>
+                                <th>Price</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let car of carlist | paginate : {itemsPerPage:10 , currentPage : page, totalItems: totalCount}">
+                                <td>
+                                    <img *ngIf="car.coverImg!=''" src="{{'http://41.187.117.153:8080/'+ car.mainPic }} " alt="Blog image" class="img-table" />
+                                    <img *ngIf="car.coverImg==''" src="assets/img/blog.png" alt="blog image" class="img-table" />
+                                </td>
+                                <td>{{car.carNameEn }}</td>
+                                <td>{{car.carNameAr}}</td>
+                                <td>{{car.carPrice}} EGP</td>
+                                <td>
+                                    <button class="btn btn-warning" type="button" (click)="editForm(car.carId)">Edit</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" data-toggle="modal" (click)="openModal(deleteTemplate)">Delete</button>
+                                </td>
+                                <ng-template #deleteTemplate>
+                                    <div class="modal-body text-center">
+                                        <p>Do You Want To Delete This Car ?</p>
+                                        <button type="button" class="btn btn-default" (click)="confirm(car.dbid)">Yes</button>
+                                        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+                                    </div>
+                                </ng-template>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="pagein">
+                        <pagination-controls (pageChange)="pageChanged($event)" maxSize={{totalPages}}></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
+
+<div *ngIf="!carlist">
+    <h1>no cars found</h1>
+</div>

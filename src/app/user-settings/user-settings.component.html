@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Settings</strong>
+            </div>
+            <div class="row settings">
+
+                <div class="col-md-4 ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <img *ngIf="user.profilePic" src="{{'http://localhost:8080/'+ user.profilePic}} " class="img-avatar" alt="user" />
+                            <img *ngIf="!user.profilePic" src="assets/img/user.png" class="img-avatar" alt="user" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-md-9 upload">
+                                    <input type="file" id="file-input" name="file-input" (change)="handleFileSelectProfile($event)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label class="col-md-8 col-form-label" for="title"><h5>First Name: {{firstName}} </h5></label>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary" (click)="openModalFirstName(changeFirstName)">change</button>
+                            <!--   <input type="text"  id="title" name="title" class="form-control" placeholder="Title"> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row ">
+                        <label class="col-md-8 col-form-label" for="title"><h5>Last Name: {{lastName}} </h5></label>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary" (click)="openModalLastName(changeLastName)">change</button>
+                            <!--   <input type="text"  id="title" name="title" class="form-control" placeholder="Title"> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-8 col-form-label" for="title"><h5>Email: {{email}}  </h5></label>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary" (click)="openModalEmail(changeEmail)">change</button>
+                            <!--   <input type="text"  id="title" name="title" class="form-control" placeholder="Title"> -->
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-8 col-form-label" for="title"><h5>password: ********* </h5></label>
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-primary" (click)="openModalPassword(changePassword)">change</button>
+                            <!--   <input type="text"  id="title" name="title" class="form-control" placeholder="Title"> -->
+                        </div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <ng-template #changeFirstName>
+        <div class="modal-body text-center">
+
+            <div class="form-group">
+
+                <label for="firstName" class="form-control-label">First Name:</label>
+                <input type="text" class="form-control" id="firstName" [(ngModel)]="firstName" required>
+                <span class="errors" *ngIf="!isFirstName">
+                    please add valid first name
+                </span>
+            </div>
+            <button type="button" class="btn btn-default" (click)="confirmFirstName()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+    </ng-template>
+
+    <ng-template #changeLastName>
+        <div class="modal-body text-center">
+
+            <div class="form-group">
+
+                <label for="lastName" class="form-control-label">Last Name:</label>
+                <input type="text" class="form-control" id="lastName" [(ngModel)]="lastName" required>
+                <span class="errors" *ngIf="!isLastName">
+                    please add valid last name
+                </span>
+            </div>
+            <button type="button" class="btn btn-default" (click)="confirmLastName()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+    </ng-template>
+
+    <ng-template #changeEmail>
+        <div class="modal-body text-center">
+
+            <div class="form-group">
+
+                <label for="email" class="form-control-label">Email:</label>
+                <input type="text" class="form-control" id="email" [(ngModel)]="email" required email>
+                <span class="errors" *ngIf="!isEmail">
+                    please add valid email
+                </span>
+            </div>
+            <button type="button" class="btn btn-default" (click)="confirmEmail()">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+    </ng-template>
+
+    <ng-template #changePassword>
+        <div class="modal-body text-center">
+            <div class="form-group">
+                <label for="oldPassword" class="form-control-label">Old Password:</label>
+                <input type="password" class="form-control" id="oldPassword" [(ngModel)]="oldPassword" required>
+                <span class="errors" *ngIf="wrongOldPassword">
+                    worng password
+                </span>
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-control-label">Password:</label>
+                <input type="password" class="form-control" id="password" [(ngModel)]="password" required>
+
+            </div>
+            <div class="form-group">
+                <label for="repassword" class="form-control-label">Re-Password:</label>
+                <input type="password" class="form-control" id="re-password" [(ngModel)]="repassword" required>
+                <span class="errors" *ngIf="wrongPassword">
+                    password not matched
+                </span>
+            </div>
+
+            <button type="button" class="btn btn-default" (click)="confirmPassword(password,repassword )">Yes</button>
+            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+        </div>
+    </ng-template>
+
+
+
+
+
+
+
+
+</div>

@@ -1,0 +1,133 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Brand Form</strong>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddNewBrand()" [formGroup]="brandForm">
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="brandId">brandId</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="brandId" id="brandId" name="brandId" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="text-input">Level Id</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="levelId" id="text-input" name="text-input" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="text-input">Brand Name English</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="brandNameEn" id="text-input" name="text-input" class="form-control" placeholder="English brand name">
+                            <span *ngIf="(brandForm.get('brandNameEn').touched || 
+                            brandForm.get('brandNameEn').dirty) && 
+                            brandForm.get('brandNameEn').errors">
+                                <span class="errors" *ngIf="brandForm.get('brandNameEn').errors.required">
+                                    Please enter English brand name
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="text-input">Brand Name Arabic</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="brandNameAr" id="text-input" name="text-input" class="form-control" placeholder="Arabic brand name">
+                            <span *ngIf="(brandForm.get('brandNameAr').touched || 
+                            brandForm.get('brandNameAr').dirty) && 
+                            brandForm.get('brandNameAr').errors">
+                                <span class="errors" *ngIf="brandForm.get('brandNameAr').errors.required">
+                                    Please enter Arabic brand name
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Image </label>
+                        <div class="col-md-9">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelect($event)">
+                            <label *ngIf="imageEdit">{{imageEdit}}</label>
+                            <span class="errors" *ngIf="isValidImage===false">
+                                Please Add Image
+                            </span>
+                            <!-- <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)"><img src="assets/img/Close-icon.png" class="img-close" /></span> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" (click)="onAddNewBrand()" class="btn btn-sm btn-primary" *ngIf="editMode==false" [disabled]="!brandForm.valid">
+                    <i class="fa fa-dot-circle-o"></i> {{'Add Brand'}}</button>
+                <button type="submit" (click)="onUpdateBrand()" class="btn btn-sm btn-primary" *ngIf="editMode==true" [disabled]="!brandForm.valid">
+                    <i class="fa fa-dot-circle-o"></i> {{'Update Brand'}}</button>
+                <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger">
+                    <i class="fa fa-ban"></i> Reset</button>
+            </div>
+
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>
+<div class="animated fadeIn" *ngIf="brands">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Brand Table
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name English</th>
+                                <th>Name Arabic</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let brand of brands | paginate : {itemsPerPage:5 , currentPage : page, totalItems: totalCount}">
+                                <td>
+                                    <img *ngIf="brand.brandImage != null" src="{{'http://41.187.117.153:8080/'+brand.brandImage}} " alt="Brand Car" class="img-table"
+                                    />
+                                    <img *ngIf="brand.brandImage == null" src="assets/img/logo-symbol.png" alt="Brand Car" class="img-table" />
+                                </td>
+                                <td>{{brand.brandNameEn}}</td>
+                                <td>{{brand.brandNameAr}}</td>
+                                <td>
+                                    <button class="btn btn-warning" type="button" (click)="editForm(brand)">Edit</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" data-toggle="modal" (click)="openModal(deleteTemplate)">Delete</button>
+                                </td>
+
+                                <ng-template #deleteTemplate>
+                                    <div class="modal-body text-center">
+                                        <p>Do You Want To Delete This Brand?</p>
+                                        <button type="button" class="btn btn-default" (click)="confirm(brand.brandId)">Yes</button>
+                                        <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+                                    </div>
+                                </ng-template>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="pagein">
+                        <pagination-controls (pageChange)="pageChanged($event)" maxSize={{totalPages}}></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>

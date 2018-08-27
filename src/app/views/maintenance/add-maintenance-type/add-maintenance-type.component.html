@@ -1,0 +1,102 @@
+<div class="row">
+  <div class="col-md-12">
+      <div class="card">
+          <div class="card-header">
+              <strong>Maintenance Type Form</strong>
+          </div>
+          <div class="card-body">
+              <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddNewType()" [formGroup]="typeForm">
+                  <div class="form-group row" style="display:none">
+                      <label class="col-md-3 col-form-label" for="typeId">typeId</label>
+                      <div class="col-md-9">
+                          <input type="text" formControlName="serviceId" id="serviceId" name="serviceId" class="form-control" placeholder="Text">
+                          <span class="help-block">This is a help text</span>
+                      </div>
+                  </div>
+                  
+
+                  <div class="form-group row">
+                      <label class="col-md-3 col-form-label" for="text-input">Maintenance Type English</label>
+                      <div class="col-md-9">
+                          <input type="text" formControlName="serviceTypeNameEn" id="text-input" name="text-input" class="form-control" placeholder="English Type name">
+                          <span *ngIf="typeForm.get('serviceTypeNameEn').errors">
+                          <span class="errors" *ngIf="typeForm.get('serviceTypeNameEn').errors.required">
+                              Please enter Maintenance Type English
+                          </span>
+                          </span>
+                      </div>
+                  </div>
+
+                  <div class="form-group row">
+                      <label class="col-md-3 col-form-label" for="text-input">Maintenance Type Arabic</label>
+                      <div class="col-md-9">
+                          <input type="text" formControlName="serviceTypeNameAr" id="text-input" name="text-input" class="form-control" placeholder="Arabic brand name">
+                          <span *ngIf="typeForm.get('serviceTypeNameAr').errors">
+                          <span class="errors" *ngIf="typeForm.get('serviceTypeNameAr').errors.required">
+                              Please enter Maintenance Type Arabic
+                          </span>
+                          </span>
+                      </div>
+                  </div>
+              </form>
+          </div>
+          <div class="card-footer">
+              <button type="submit" (click)="onAddNewType()" class="btn btn-sm btn-primary" *ngIf="editMode==false" [disabled]="!typeForm.valid"><i class="fa fa-dot-circle-o"></i> {{'Add Maintenance'}}</button>
+              <button type="submit" (click)="onUpdateType()" class="btn btn-sm btn-primary" *ngIf="editMode==true" [disabled]="!typeForm.valid"><i class="fa fa-dot-circle-o"></i> {{'Update Maintenance'}}</button>
+              <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger" ><i class="fa fa-ban"></i> Reset</button>
+          </div>
+
+      </div>
+      <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>
+<div class="animated fadeIn" *ngIf="maintenances">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="card">
+              <div class="card-header">
+                  <i class="fa fa-align-justify"></i> Maintenance Type Table
+              </div>
+              <div class="card-body">
+                  <table class="table">
+                      <thead>
+                          <tr>
+                              <th>Name English</th>
+                              <th>Name Arabic</th>
+                              <th></th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let maintenance of maintenances | paginate : {itemsPerPage:5 , currentPage : page, totalItems: totalCount}">
+                              <td>{{maintenance.serviceTypeNameEn}}</td>
+                              <td>{{maintenance.serviceTypeNameAr}}</td>
+                              <td>
+                                  <button class="btn btn-warning" type="button" (click)="editForm(maintenance)">Edit</button>
+                              </td>
+                              <td>
+                                  <button class="btn btn-danger" type="button"  data-toggle="modal" (click)="openModal(deleteTemplate)" >Delete</button>
+                              </td>
+
+                              <ng-template #deleteTemplate>
+                                  <div class="modal-body text-center">
+                                    <p>Do You Want To Delete This Maintenance Type</p>
+                                    <button type="button" class="btn btn-default" (click)="confirm(maintenance.serviceId)" >Yes</button>
+                                    <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+                                  </div>
+                                </ng-template>
+
+                          </tr>
+
+                      </tbody>
+                  </table>
+                  <div class="pagein">
+                      <pagination-controls (pageChange)="pageChanged($event)" maxSize={{totalPages}}></pagination-controls>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <!--/.col-->
+  </div>
+</div>

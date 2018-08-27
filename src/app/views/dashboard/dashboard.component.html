@@ -1,0 +1,108 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-primary">
+                <div class="card-body pb-0">
+                    <button type="button" class="btn btn-transparent p-0 float-right">
+                        <i class="icon-location-pin"></i>
+                    </button>
+                    <h4 class="mb-0">0</h4>
+                    <p>Customers</p>
+                </div>
+                <div class="chart-wrapper px-3" style="height:70px;">
+                    <canvas baseChart class="chart" [datasets]="lineChart1Data" [labels]="lineChart1Labels" [options]="lineChart1Options" [colors]="lineChart1Colours"
+                        [legend]="lineChart1Legend" [chartType]="lineChart1Type" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!--/.col-->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-warning">
+                <div class="card-body pb-0">
+                    <button type="button" class="btn btn-transparent p-0 float-right">
+                        <i class="icon-location-pin"></i>
+                    </button>
+                    <h4 class="mb-0">0</h4>
+                    <p>Test Drive Requests</p>
+                </div>
+                <div class="chart-wrapper" style="height:70px;">
+                    <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels" [options]="lineChart3Options" [colors]="lineChart3Colours"
+                        [legend]="lineChart3Legend" [chartType]="lineChart3Type" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+        <div class="col-sm-6 col-lg-3">
+            <div class="card text-white bg-danger">
+                <div class="card-body pb-0">
+                    <button type="button" class="btn btn-transparent p-0 float-right">
+                        <i class="icon-location-pin"></i>
+                    </button>
+                    <h4 class="mb-0">0</h4>
+                    <p>Maintenance Requests </p>
+                </div>
+                <div class="chart-wrapper px-3" style="height:70px;">
+                    <canvas baseChart class="chart" [datasets]="barChart1Data" [labels]="barChart1Labels" [options]="barChart1Options" [colors]="barChart1Colours"
+                        [legend]="barChart1Legend" [chartType]="barChart1Type" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+    <div class="animated fadeIn">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Maintenance Table
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Customer Name</th>
+                                    <th>Car Model</th>
+                                    <th>Car Number</th>
+                                    <th>Chase Number</th>
+                                    <th>User Mobile</th>
+                                    <th>Maintenance Type</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let maintenance of maintenanceList | paginate : {itemsPerPage:10 , currentPage : page, totalItems: totalCount}">
+                                    <td>{{maintenance.userCar.nameInLicenseNumber}}</td>
+                                    <td>{{maintenance.userCar.modelName}}</td>
+                                    <td>{{maintenance.userCar.carNumber}}</td>
+                                    <td>{{maintenance.userCar.chaseNumber}}</td>
+                                    <td>{{maintenance.owner.mobile}}</td>
+                                    <td>{{maintenance.serviceId.value}}</td>
+                                    <td>
+                                        <button class="btn btn-danger" type="button" (click)="openModal(deleteTemplate)">Delete</button>
+                                    </td>
+                                    <ng-template #deleteTemplate>
+                                        <div class="modal-body text-center">
+                                            <p>Do You Want To Delete This Maintenance Request ?</p>
+                                            <button type="button" class="btn btn-default" (click)="confirm(maintenance.requestId)">Yes</button>
+                                            <button type="button" class="btn btn-primary" (click)="decline()">No</button>
+                                        </div>
+                                    </ng-template>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pagein">
+                            <pagination-controls (pageChange)="pageChanged($event)" maxSize={{totalPages}}></pagination-controls>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--/.col-->
+        </div>
+    </div>
+
+    <!--/.row-->
+</div>

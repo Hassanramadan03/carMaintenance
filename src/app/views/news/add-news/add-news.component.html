@@ -1,0 +1,155 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>News Form</strong>
+            </div>
+            <div class="card-body">
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddNews()" [formGroup]="newsForm">
+
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="dbid">dbid</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="dbid" id="level-id" name="dbid" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row" style="display:none">
+                        <label class="col-md-3 col-form-label" for="level-id">level-id</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="levelId" id="level-id" name="level-id" class="form-control" placeholder="Text">
+                            <span class="help-block">This is a help text</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="title">Title</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="title" id="title" name="title" class="form-control" placeholder="Title">
+                            <span *ngIf="(newsForm.get('title').touched || 
+                            newsForm.get('title').dirty) && 
+                            newsForm.get('title').errors">
+                            <span class="errors" *ngIf="newsForm.get('title').errors.required">
+                                Please enter News Title
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="description">Description</label>
+                        <div class="col-md-9">
+                            <textarea formControlName="description" id="description" name="description" class="form-control" placeholder="Description" rows="3"></textarea>
+                            <span *ngIf="(newsForm.get('description').touched || 
+                            newsForm.get('description').dirty) && 
+                            newsForm.get('description').errors">
+                            <span class="errors" *ngIf="newsForm.get('description').errors.required">
+                                Please enter News Description
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="subDescription">Small Description</label>
+                        <div class="col-md-9">
+                            <input type="text" formControlName="subDescription" id="subDescription" name="subDescription" class="form-control" placeholder="Sub Description">
+                            <span *ngIf="(newsForm.get('subDescription').touched || 
+                            newsForm.get('subDescription').dirty) && 
+                            newsForm.get('subDescription').errors">
+                            <span class="errors" *ngIf="newsForm.get('subDescription').errors.required">
+                                Please enter News Sub-description
+                            </span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                            <span class="errors" *ngIf="isValidImage===false">
+                                    Please Add All Images
+                                </span>
+                        </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="file-input">Cover Image </label>
+                        <div class="col-md-9">
+                            <input type="file" id="file-input" name="file-input" (change)="handleFileSelectTimeLine($event)">
+                            <label *ngIf="editMode">image</label>
+                            <span *ngIf="imageEdit"><img src="assets/img/Close-icon.png" class="img-close" /></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                            <label class="col-md-3 col-form-label" for="file-input">Thumbnail Image </label>
+                            <div class="col-md-9">
+                                <input type="file" id="file-input" name="file-input" (change)="handleFileSelectThumbnail($event)">
+                                <label *ngIf="editMode">image</label>
+                                <span *ngIf="imageEdit"><img src="assets/img/Close-icon.png" class="img-close" /></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                                <label class="col-md-3 col-form-label" for="file-input">Main Image </label>
+                                <div class="col-md-9">
+                                    <input type="file" id="file-input" name="file-input" (change)="handleFileSelectMainImage($event)">
+                                    <label *ngIf="editMode"></label>
+                                    <span *ngIf="imageEdit"><img src="assets/img/Close-icon.png" class="img-close" /></span>
+                                </div>
+                            </div>
+
+                </form>
+            </div>
+            <div class="card-footer">
+                <button type="submit" (click)="onAddNews()" class="btn btn-sm btn-primary" *ngIf="editMode==false"><i class="fa fa-dot-circle-o"></i> {{'Add news'}}</button>
+                <button type="submit" (click)="onUpdateNews()" class="btn btn-sm btn-primary" *ngIf="editMode==true"><i class="fa fa-dot-circle-o"></i> {{'Update News'}}</button>
+                <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+            </div>
+
+        </div>
+        <!--/.col-->
+    </div>
+    <!--/.row-->
+</div>
+
+<div class="animated fadeIn" *ngIf="newslist">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> News Table
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>SubDescription</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let news of newslist">
+                                <td>
+                                    <img *ngIf="news.coverImg!=''" src="{{'http://169.254.61.44:8080/'+ news.coverImg}} " alt="Brand Car" class="img-table" />
+                                    <img *ngIf="news.coverImg==''" src="assets/img/logo-symbol.png" alt="Brand Car" class="img-table" />
+                                </td>
+                                <td>{{news.title}}</td>
+                                <td>{{news.description}}</td>
+                                <td>{{news.subDescription}}</td>
+                                <td>
+                                    <button class="btn btn-warning" type="button" (click)="editForm(news)">Edit</button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" type="button" (click)="onDeleteNews(news.dbid)">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>

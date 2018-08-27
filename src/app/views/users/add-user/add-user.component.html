@@ -1,0 +1,131 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Add New User</strong>
+
+                </div>
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onAddUser()" [formGroup]="userForm">
+                    <div class="card-body">
+                        <div class="row" style="display:none">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">User Id</label>
+                                    <input type="text" formControlName="userId" name="userId" class="form-control" id="userId" placeholder="userId">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">First name</label>
+                                    <input type="text" formControlName="firstName" name="firstName" class="form-control" id="firstName" placeholder="first name">
+                                    <span *ngIf="(
+                                    userForm.get('firstName').dirty) && 
+                                    userForm.get('firstName').errors">
+                                    <span class="errors" *ngIf="userForm.get('firstName').errors.required">
+                                        Please enter first name
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/.row-->
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="ccnumber">Last name</label>
+                                    <input type="text" formControlName="lastName" name="lastName" class="form-control" id="lastName" placeholder="last name">
+                                    <span *ngIf="(
+                                    userForm.get('lastName').dirty) && 
+                                    userForm.get('lastName').errors">
+                                    <span class="errors" *ngIf="userForm.get('lastName').errors.required">
+                                        Please enter last name
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">E-mail</label>
+                                    <input type="text" formControlName="email" name="email" class="form-control" id="email" placeholder="email">
+                                    <span *ngIf="(userForm.get('email').touched || 
+                                    userForm.get('email').dirty) && 
+                                    userForm.get('email').errors">
+                                    <span class="errors" *ngIf="userForm.get('email').errors.required">
+                                        Please enter valid email
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Password</label>
+                                    <input type="password" formControlName="password" name="password" class="form-control" id="password" placeholder="password">
+                                    <span *ngIf="(userForm.get('password').touched || 
+                                    userForm.get('password').dirty) && 
+                                    userForm.get('password').errors">
+                                    <span class="errors" *ngIf="userForm.get('password').errors.required">
+                                        Please enter password
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-12">
+                                <label for="userLanguage">Language</label>
+                                <select class="form-control" id="userLanguage" name="userLanguage" formControlName="userLanguage">
+                                    <option value="en">En</option>
+                                    <option value="ar">Ar</option>
+                                  </select>
+                                <span *ngIf="(userForm.get('userLanguage').touched || 
+                                  userForm.get('userLanguage').dirty) && 
+                                  userForm.get('userLanguage').errors">
+                                  <span class="errors" *ngIf="userForm.get('userLanguage').errors.required">
+                                      Please choose Language
+                                  </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="name">Mobile Number</label>
+                                    <input type="text" formControlName="mobile" name="mobile" class="form-control" id="mobile" placeholder="mobile">
+                                    <span *ngIf="(userForm.get('mobile').touched || 
+                                    userForm.get('mobile').dirty) && 
+                                    userForm.get('mobile').errors">
+                                    <span class="errors" *ngIf="userForm.get('mobile').errors.required">
+                                        Please enter mobile
+                                    </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <button type="submit" (click)="onAddUser()" class="btn btn-sm btn-primary" [disabled]="!userForm.valid" *ngIf="editMode==false"><i class="fa fa-dot-circle-o"></i>{{'Add Customer'}}</button>
+                                    <button type="submit" (click)="onUpdateUser()" class="btn btn-sm btn-primary" [disabled]="!userForm.valid" *ngIf="editMode==true"><i class="fa fa-dot-circle-o" ></i> {{'Update Customer'}}</button>
+                                </div>
+                                <div class="col-sm-1">
+                                    <button type="reset" (click)="resetForm()" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Reset</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
