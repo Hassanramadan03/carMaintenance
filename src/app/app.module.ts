@@ -81,6 +81,7 @@ import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import { UserSettingsComponent } from './user-settings/user-settings.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { UserService } from './service/user.service';
+import { ApiUrlService } from './service/api-url.service';
 
 
 
@@ -122,6 +123,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8988', options: {} };
   },
     AuthenticationService,
     AuthGuard,
+    ApiUrlService,
     UserService,
     GlobalTokenService,
   {

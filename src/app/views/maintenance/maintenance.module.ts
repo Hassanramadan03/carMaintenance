@@ -22,6 +22,7 @@ import { MaintenenaceService } from "../../service/maintenance.service";
 import { UserCarService } from "../../service/usercar.service";
 import { RequestTestDriveComponent } from "./request-test-drive/request-test-drive.component";
 import { TestDriveService } from "../../service/test-drive.service";
+import { ApiUrlService } from "../../service/api-url.service";
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { TestDriveService } from "../../service/test-drive.service";
     Modelervice,
     MaintenenaceService,
     UserCarService,
-    TestDriveService
+    TestDriveService,
+    ApiUrlService
   ]
 })
 export class MaintenanceModule {}

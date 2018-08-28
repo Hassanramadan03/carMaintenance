@@ -20,6 +20,7 @@ import { AuthInterceptor } from '../../auth.interceptor ';
 import { ContactUsService } from '../../service/contact-us.service';
 import { UserCarService } from '../../service/usercar.service';
 import { RequestQouteService } from '../../service/request-qoute.service';
+import { ApiUrlService } from '../../service/api-url.service';
 
 
 
@@ -52,7 +53,8 @@ import { RequestQouteService } from '../../service/request-qoute.service';
     AuthGuard,
     ContactUsService,
     RequestQouteService,
-    UserCarService
+    UserCarService,
+    ApiUrlService
     
   ],
 })

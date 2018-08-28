@@ -5,6 +5,7 @@ import { MaintenanceType } from "../model/maintenance-type";
 import { Image } from "../model/image";
 import { GlobalTokenService } from "./global-token.service";
 import { Pagenation } from "../model/pagination";
+import { ApiUrlService } from "./api-url.service";
 
 @Injectable()
 export class MaintenenaceService {
@@ -12,106 +13,67 @@ export class MaintenenaceService {
   checkOut: String;
   type: MaintenanceType;
   pagenation: Pagenation;
-  constructor(private http: Http, private tokenService: GlobalTokenService) { }
+  constructor(private http: Http, private tokenService: GlobalTokenService,private apiUrlService:ApiUrlService) { }
 
   addType(type) {
-    let header = new Headers();
-    console.log(JSON.stringify(type));
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
     return this.http
-      .post("http://41.187.117.153:8080/addServiceType", type, { headers: header })
+      .post(this.apiUrlService.getApiUrl().addServiceType, type, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   getAllTypes(pagenation: Pagenation) {
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
+    
     return this.http
-      .post("http://41.187.117.153:8080/findAllServiceAdmin", pagenation, {
-        headers: header
-      })
+      .post(this.apiUrlService.getApiUrl().findAllServiceAdmin, pagenation, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   updateType(type) {
-    let header = new Headers();
-    console.log(JSON.stringify(type));
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
     return this.http
-      .post("http://41.187.117.153:8080/updateServiceType", type, {
-        headers: header
-      })
+      .post(this.apiUrlService.getApiUrl().updateServiceType, type, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   deleteType(id) {
-    let header = new Headers();
-    console.log(JSON.stringify(id));
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
+    
     return this.http
-      .post("http://41.187.117.153:8080/deleteServiceType", id, { headers: header })
+      .post(this.apiUrlService.getApiUrl().deleteServiceType, id, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   deleteImage(image: Image) {
-    let header = new Headers();
-
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
     return this.http
-      .post("http://41.187.117.153:8080/delete-image-brand", image, {
-        headers: header
-      })
+      .post(this.apiUrlService.getApiUrl().deleteImageBrand, image, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   // Services
 
   getAllServices(pagenation: Pagenation) {
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
+    
     return this.http
-      .post("http://41.187.117.153:8080/findAllMaintainceRequeste", pagenation, {
-        headers: header
-      })
+      .post(this.apiUrlService.getApiUrl().findAllMaintainceRequeste, pagenation, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   getServicesById(id) {
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
+    
     return this.http
-      .get("http://41.187.117.153:8080/findMaintainceRequesteById/" + id, {
-        headers: header
-      })
+      .get(this.apiUrlService.getApiUrl().findMaintainceRequesteById + id, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   deleteServicesById(id) {
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
+    
     return this.http
-      .get("http://41.187.117.153:8080/deleteService/" + id, {
-        headers: header
-      })
+      .get(this.apiUrlService.getApiUrl().deleteService + id, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   readServicesById(id) {
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
+    
     return this.http
-      .get("http://41.187.117.153:8080/readService/" + id, {
-        headers: header
-      })
+      .get(this.apiUrlService.getApiUrl().readService + id, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 }

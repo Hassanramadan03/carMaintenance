@@ -4,6 +4,7 @@ import "rxjs/add/operator/map";
 import { MaintenanceType } from "../model/maintenance-type";
 import { GlobalTokenService } from "./global-token.service";
 import { Pagenation } from "../model/pagination";
+import { ApiUrlService } from './api-url.service'
 
 @Injectable()
 export class ContactUsService {
@@ -11,41 +12,24 @@ export class ContactUsService {
   checkOut: String;
   type: MaintenanceType;
   pagenation: Pagenation;
-  constructor(private http: Http, private tokenService: GlobalTokenService) { }
-   
- 
-  // Services
+  constructor(private http: Http, private tokenService: GlobalTokenService, private apiUrlService: ApiUrlService) { }
+
 
   getAllContacts(pagenation: Pagenation) {
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
     return this.http
-      .post("http://192.168.1.177:8080/getAllContactUs", pagenation, {
-        headers: header
-      })
+      .post(this.apiUrlService.getApiUrl().getAllContactUs, pagenation, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   deleteContactById(id) {
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
     return this.http
-      .get("http://192.168.1.177:8080/deleteContactUs/" + id, {
-        headers: header
-      })
+      .get(this.apiUrlService.getApiUrl().deleteContactUs + id, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 
   readContactById(id) {
-    let header = new Headers();
-    header.append("Content-Type", "application/json");
-    header.append("Authorization", "Bearer " + this.tokenService.getToken());
     return this.http
-      .get("http://192.168.1.177:8080/findContactUsById/" + id, {
-        headers: header
-      })
+      .get(this.apiUrlService.getApiUrl().findContactUsById + id, this.apiUrlService.getHeaders())
       .map(res => res.json());
   }
 }

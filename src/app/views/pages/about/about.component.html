@@ -5,34 +5,183 @@
                 <strong>About Us Form</strong>
             </div>
             <div class="card-body">
-                <form action="" class="form-horizontal">
 
+                <form action="http://192.168.1.177:8080/editAboutUs" name="aboutUsForm"  #formDir="ngForm" method="post" enctype="multipart/form-data" class="form-horizontal">
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="whoWeAre">Who we Are</label>
                         <div class="col-md-9">
                             <textarea class="form-control" name="whoWeAre" [(ngModel)]="about.whoWeAre" [value]="about.whoWeAre" placeholder="Who we Are"
-                                rows="3"></textarea>
+                                rows="3" #whoWeAre="ngModel" required></textarea>
+                            <div *ngIf="whoWeAre.invalid && (whoWeAre.dirty || whoWeAre.touched)" class="alert alert-danger">
+                                <div *ngIf="whoWeAre.errors.required">
+                                    whoWeAre is required.
+                                </div>
+                                <div *ngIf="whoWeAre.errors.minlength">
+                                    whoWeAre must be at least 4 characters long.
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="whoWeAreAr">Who we AreAr</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="whoWeAreAr" [(ngModel)]="about.whoWeAreAr" [value]="about.whoWeAreAr" placeholder="Who we Are"
+                                rows="3" #whoWeAreAr="ngModel" required></textarea>
+                            <div *ngIf="whoWeAreAr.invalid && (whoWeAreAr.dirty || whoWeAreAr.touched)" class="alert alert-danger">
+                                <div *ngIf="whoWeAreAr.errors.required">
+                                    whoWeAreAr is required.
+                                </div>
+                                <div *ngIf="whoWeAreAr.errors.minlength">
+                                    whoWeAreAr must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="mission">Mission</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="mission" [(ngModel)]="about.mission" [value]="about.mission" placeholder="mission"
-                                rows="3"></textarea>
+                            <textarea class="form-control" name="mission" [(ngModel)]="about.mission" [value]="about.mission" placeholder="mission" rows="3"
+                            #mission="ngModel"  required></textarea>
+                            <div *ngIf="mission.invalid && (mission.dirty || mission.touched)" class="alert alert-danger">
+                                <div *ngIf="mission.errors.required">
+                                    mission is required.
+                                </div>
+                                <div *ngIf="mission.errors.minlength">
+                                    mission must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="missionAr">MissionAr</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="missionAr" [(ngModel)]="about.missionAr" [value]="about.missionAr" placeholder="missionAr"
+                                rows="3" #missionAr="ngModel"  required></textarea>
+                            <div *ngIf="missionAr.invalid && (missionAr.dirty || missionAr.touched)" class="alert alert-danger">
+                                <div *ngIf="missionAr.errors.required">
+                                    missionAr is required.
+                                </div>
+                                <div *ngIf="missionAr.errors.minlength">
+                                    missionAr must be at least 4 characters long.
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 col-form-label" for="vission">Vission</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="vission" [(ngModel)]="about.vission" [value]="about.vission" placeholder="vission"
-                                rows="3"></textarea>
+                            <textarea class="form-control" name="vission" [(ngModel)]="about.vission" [value]="about.vission" placeholder="vission" rows="3" #vission="ngModel"  required></textarea>
+                            <div *ngIf="vission.invalid && (vission.dirty || vission.touched)" class="alert alert-danger">
+                                <div *ngIf="vission.errors.required">
+                                    vission is required.
+                                </div>
+                                <div *ngIf="vission.errors.minlength">
+                                    vission must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="vissionAr">VissionAr</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="vissionAr" [(ngModel)]="about.vissionAr" [value]="about.vissionAr" placeholder="vissionAr"
+                                rows="3" #vissionAr="ngModel"  required></textarea>
+                            <div *ngIf="vissionAr.invalid && (vissionAr.dirty || vissionAr.touched)" class="alert alert-danger">
+                                <div *ngIf="vissionAr.errors.required">
+                                    vissionAr is required.
+                                </div>
+                                <div *ngIf="vissionAr.errors.minlength">
+                                    vissionAr must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="history">history</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="history" [(ngModel)]="about.history" [value]="about.history" placeholder="history" rows="3" #history="ngModel"  required></textarea>
+                            <div *ngIf="history.invalid && (history.dirty || history.touched)" class="alert alert-danger">
+                                <div *ngIf="history.errors.required">
+                                     history is required.
+                                </div>
+                                <div *ngIf="history.errors.minlength">
+                                     history must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="historyAr">historyAr</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="historyAr" [(ngModel)]="about.historyAr" [value]="about.historyAr" placeholder="historyAr"
+                                rows="3" #historyAr="ngModel"  required></textarea>
+                            <div *ngIf="historyAr.invalid && (historyAr.dirty || historyAr.touched)" class="alert alert-danger">
+                                <div *ngIf="historyAr.errors.required">
+                                    historyAr is required.
+                                </div>
+                                <div *ngIf="historyAr.errors.minlength">
+                                    historyAr must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="messageFromChairman">messageFromChairman</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="messageFromChairman" [(ngModel)]="about.messageFromChairman" [value]="about.messageFromChairman"
+                                placeholder="messageFromChairman" #messageFromChairman="ngModel"  required rows="3"></textarea>
+                            <div *ngIf="messageFromChairman.invalid && (messageFromChairman.dirty || messageFromChairman.touched)" class="alert alert-danger">
+                                <div *ngIf="messageFromChairman.errors.required">
+                                    messageFromChairman is required.
+                                </div>
+                                <div *ngIf="messageFromChairman.errors.minlength">
+                                    messageFromChairman must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="messageFromChairmanAr">messageFromChairmanAr</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" name="messageFromChairmanAr" [(ngModel)]="about.messageFromChairmanAr" [value]="about.messageFromChairmanAr"
+                                placeholder="messageFromChairmanAr" #messageFromChairmanAr="ngModel"  required rows="3"></textarea>
+                            <div *ngIf="messageFromChairmanAr.invalid && (messageFromChairmanAr.dirty || messageFromChairmanAr.touched)" class="alert alert-danger">
+                                <div *ngIf="messageFromChairmanAr.errors.required">
+                                    messageFromChairmanAr is required.
+                                </div>
+                                <div *ngIf="messageFromChairmanAr.errors.minlength">
+                                    messageFromChairmanAr must be at least 4 characters long.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 col-form-label" for="chairmanImage">Second Internal Image</label>
+                        <div class="col-md-6">
+                            <input type="file" id="chairmanImage" name="chairmanImage" (change)="handleFileSelectInternal2($event)">
+                            <label *ngIf="imageEdit">{{internalImageEdit2}}</label>
+                            <span *ngIf="imageEdit" (click)="onDeleteImage(imageEdit)">
+                                <img src="assets/img/Close-icon.png" class="img-close" />
+                            </span>
+                        </div>
+                        <div class="col-md-3">
+                            <p *ngIf="upload">
+                                <img src="assets/img/load.gif " class="img-upload" alt="image" /> uploading...
+                            </p>
+                        </div>
+                        <div class="col-md-3">
+                            <img src="http://192.168.1.177:8080/{{about.chairmanImage}}" class="img-avatar" alt="image" />
+                            <!-- <img   src="assets/img/car.png" class="img-avatar" alt="image" /> -->
                         </div>
                     </div>
                 </form>
+
             </div>
+           
             <div class="card-footer">
-                <button type="submit" (click)="onAddNewBrand()" class="btn btn-sm btn-primary" *ngIf="editMode==false" [disabled]="!aboutForm.valid">
-                    <i class="fa fa-dot-circle-o"></i> {{'Add Brand'}}</button>
+                <button type="submit" [disabled]='history.invalid||historyAr.invalid||whoWeAre.invalid||whoWeAreAr.invalid||mission.invalid||missionAr.invalid||vission.invalid||vissionAr.invalid' (click)="onUpdate()" class="btn btn-sm btn-primary">
+                    <i class="fa fa-dot-circle-o"></i> {{'Save'}}</button>
                 <button type="submit" (click)="onUpdateBrand()" class="btn btn-sm btn-primary" *ngIf="editMode==true" [disabled]="!aboutForm.valid">
                     <i class="fa fa-dot-circle-o"></i> {{'Update Brand'}}</button>
                 <button type="reset" (click)="about={}" class="btn btn-sm btn-danger">

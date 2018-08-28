@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
   totalCount: number;
   totalPages: number;
   modalRef: BsModalRef;
-  statistics: Statistics;
+  statistics: any={};
 
   findAllMaintenanceRequest(pagenation) {
     console.log(pagenation);

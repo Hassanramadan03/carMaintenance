@@ -21,6 +21,7 @@ import { AboutComponent } from './about/about.component';
 import { ServiceCenterComponent } from './sevicecenter/service-center.component';
 import { ShowRoomComponent } from './showrooms/showroom.component';
 import { AboutService } from '../../service/about.service';
+import { ApiUrlService } from '../../service/api-url.service';
 
 
 
@@ -53,6 +54,7 @@ import { AboutService } from '../../service/about.service';
     Modelervice,
     CarService,
     AuthGuard,
+    ApiUrlService,
     AboutService
 
   ],
